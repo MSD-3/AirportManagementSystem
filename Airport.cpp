@@ -1,6 +1,7 @@
 //preprocessor directives
 #include<iostream>
 #include<list>
+#include<iterator>
 #include "Order.cpp"
 #define maxTickets 5
 using namespace std;
@@ -194,33 +195,9 @@ class Customer{
         cin>>fare;
         return fare;
     }
-    public:
-    void addnew(){
-        cout<<"\nEnter name : ";
-        cin>>ws;
-        getline(cin,name);
-        cout<<"\nEnter phone : ";
-        cin>>phone;
-        validatePhone();
-
-        cout<<"\nEnter email : ";
-        cin>>email;
-        validateEmail();
-        cout<<"\nEnter address : ";
-        cin>>ws;
-        getline(cin,address);
-    }
-
-    void edit(){
-        int ch=0;
-        cout<<"\nWhat do you want to edit? ";
-        cout<<"\n1.Name\n2.Phone Number\n3.Email\n4.Address\n";
-        cout<<"\nEnter your choice: ";
-        cin>>ch;
-        update(ch);
-    }
 
     void update(int ch){
+        cout<<"\n1.Edit Customer Account\n";
         switch(ch){
             case 1: cout<<"\nEnter name : ";
                     cin>>ws;
@@ -246,6 +223,34 @@ class Customer{
             break;
         }
     }
+    public:
+    void addnew(){
+        cout<<"\n1.Create Customer Account\n";
+        cout<<"\nEnter name : ";
+        cin>>ws;
+        getline(cin,name);
+        cout<<"\nEnter phone : ";
+        cin>>phone;
+        validatePhone();
+
+        cout<<"\nEnter email : ";
+        cin>>email;
+        validateEmail();
+        cout<<"\nEnter address : ";
+        cin>>ws;
+        getline(cin,address);
+    }
+
+    void edit(){
+        int ch=0;
+        cout<<"\nWhat do you want to edit? ";
+        cout<<"\n1.Name\n2.Phone Number\n3.Email\n4.Address\n";
+        cout<<"\nEnter your choice: ";
+        cin>>ch;
+        update(ch);
+    }
+
+    
     void createOrder(){                 //This customer creates an order
         if(Orderlist.size()>=maxTickets){
             cout<<"\nMax "<<maxTickets<<" tickets per customer!\n";
@@ -262,16 +267,35 @@ class Customer{
     //delete function
     void Delete(){
         delete this;
+        cout<<"\nAccount Deleted!\n";
     }
 };
 
 
 int main(){
+    string dash="--------------------------";
+    cout<<dash<<"\n Airline Booking Services\n"<<dash<<endl;
     Customer *c=new Customer;
     c->addnew();
-    c->createOrder();
-    c->createOrder();
-    c->createOrder();
-
+    int choice=5;
+    do{                             //menu driven system
+        cout<<"\n1.Book Ticket.";
+        cout<<"\n2.Edit Existing Account.";
+        cout<<"\n3.Delete Account.";
+        cout<<"\n4.Exit.";
+        cin>>choice;
+        switch(choice){
+            case 1:c->createOrder();
+                    break;
+            case 2:c->edit();
+                    break;
+            case 3:c->Delete();
+                    break;
+            case 4:cout<<"\nExiting\n";
+                    break;
+            default:cout<<"\nWrong Input.\nTry Again.\n";
+                    break;
+        }
+    }while(choice!=4);
     return 0;
 }
