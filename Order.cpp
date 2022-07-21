@@ -25,8 +25,7 @@ class Order{
         time_t Time=time(0);
         tm *tmp=localtime(&Time);
         ordernumber=tmp->tm_zone+to_string(tmp->tm_mday)+to_string(tmp->tm_mon)+to_string(tmp->tm_year+1900)+to_string(tmp->tm_hour)+to_string(tmp->tm_min)+to_string(tmp->tm_sec)+to_string(orderNo);
-        orderNo++;
-        cout<<endl<<ordernumber<<endl;
+        orderNo++;     
     }
 
     public:
@@ -37,10 +36,16 @@ class Order{
         this->price=price;
     }
 
-    
+    void display(){
+        cout<<"\nOrder Number : "<<ordernumber;
+    }
 
     void setState(string state){        //function to set the state 
         this->state=state;
+    }
+
+    string getState(){
+        return state;
     }
 
     double getPrice(){
@@ -86,6 +91,8 @@ class Passenger:public Order{
         insurance=company;
         weight_of_luggage=luggageWeight;
         priorityBoarding=priority;
+        priorityCheck();
+        extraLuggageCheck();
     }
 
     void edit(){
@@ -128,5 +135,13 @@ class Passenger:public Order{
                     break;
         }
     }
-
+    void display(){
+        Order::display();
+        cout<<"\nPassenger Name : "<<passengerName;
+        cout<<"\nDestination : "<<getState();
+        cout<<"\nInsurance Information : "<<insurance;
+        cout<<"\nLuggage Weight : "<<weight_of_luggage;
+        cout<<"\nPriority Boarding : "<<(priorityHike?"Yes":"No");
+        cout<<"\nFare : "<<getPrice()<<endl;
+    }
 };

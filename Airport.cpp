@@ -176,7 +176,7 @@ class Customer{
         getline(cin,insurance);
         cout<<"\nEnter weight of luggage : ";
         cin>>weight_of_luggage;
-        cout<<"\nPress 1 for priority boarding.\nPress 2 for normal boarding.\n : ";
+        cout<<"\nPress 1 for priority boarding. Press 2 for normal boarding. : ";
         cin>>temp;
         if(temp==1)
             priorityBoarding=true;
@@ -218,6 +218,7 @@ class Customer{
                     cin>>ws;
                     getline(cin,address);
                     break;
+            case 5: break;
 
             default:cout<<"\n\nWrong Choice Entered!\n";
             break;
@@ -244,7 +245,7 @@ class Customer{
     void edit(){
         int ch=0;
         cout<<"\nWhat do you want to edit? ";
-        cout<<"\n1.Name\n2.Phone Number\n3.Email\n4.Address\n";
+        cout<<"\n1.Name\n2.Phone Number\n3.Email\n4.Address\n5.Go back\n";
         cout<<"\nEnter your choice: ";
         cin>>ch;
         update(ch);
@@ -263,6 +264,18 @@ class Customer{
         addPassenger();        
     }
 
+    void displayOrders(){
+        list<Passenger>::iterator it;
+        int i=1;
+        if(Orderlist.empty()){
+            cout<<"\nNo Booking History!\n";
+            return;
+        }
+        for(it=Orderlist.begin();it!=Orderlist.end();it++){
+            cout<<"\n\nOrder #"<<i++;
+            it->display();
+        }
+    }
     
     //delete function
     void Delete(){
@@ -277,25 +290,29 @@ int main(){
     cout<<dash<<"\n Airline Booking Services\n"<<dash<<endl;
     Customer *c=new Customer;
     c->addnew();
-    int choice=5;
+    int choice=6;
     do{                             //menu driven system
         cout<<"\n1.Book Ticket.";
         cout<<"\n2.Edit Existing Account.";
-        cout<<"\n3.Delete Account.";
-        cout<<"\n4.Exit.";
+        cout<<"\n3.Display Bookings.";
+        cout<<"\n4.Delete Account.";
+        cout<<"\n5.Exit.";
+        cout<<"\n\nEnter Choice: ";
         cin>>choice;
         switch(choice){
             case 1:c->createOrder();
                     break;
             case 2:c->edit();
                     break;
-            case 3:c->Delete();
+            case 3:c->displayOrders();
                     break;
-            case 4:cout<<"\nExiting\n";
+            case 4:c->Delete();
+                    break;
+            case 5:cout<<"\nExiting\n";
                     break;
             default:cout<<"\nWrong Input.\nTry Again.\n";
                     break;
         }
-    }while(choice!=4);
+    }while(choice!=5);
     return 0;
 }
