@@ -31,6 +31,6 @@ int main(){
             default:cout<<"\nWrong Input.\nTry Again.\n";
                     break;
         }
-    }while(choice!=5);
+    }while(choice!=5);  //exiting condition
     return 0;
 }

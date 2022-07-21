@@ -9,8 +9,8 @@ using namespace std;
 class Customer{
     string email,name,address,phone;
     list <Passenger> Orderlist;
-    //function ot validate phone number
-    void validatePhone(){
+    
+    void validatePhone(){       //function ot validate phone number
         const regex pattern("^[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{3}[-\\s\\.]?[0-9]{4,6}$");
         if(!regex_match(phone, pattern)){
             cout<<"\nEnter proper Phone number!";
@@ -22,8 +22,7 @@ class Customer{
         validatePhone();
     }
     
-    //function to validate email
-    void validateEmail(){
+    void validateEmail(){            //function to validate email
         const regex pattern(
         "(\\w+)(\\.|_)?(\\w*)@(\\w+)(\\.(\\w+))+");
         if(!regex_match(email, pattern)){
@@ -60,8 +59,8 @@ class Customer{
         cin>>ws;
         getline(cin,destination);
         price=getPrice(destination);
-        Passenger p1(passengerName,insurance,weight_of_luggage,destination,price,priorityBoarding);
-        Orderlist.push_back(p1);
+        Passenger p1(passengerName,insurance,weight_of_luggage,destination,price,priorityBoarding);     //creating object of Passenger class
+        Orderlist.push_back(p1);                                                                        //pushing object to list
     }
     double getPrice(string destnation){     //TODO:function to read a file/ database to find the price of the flight and return
         double fare;
@@ -70,7 +69,7 @@ class Customer{
         return fare;
     }
 
-    void update(int ch){
+    void update(int ch){            //private function to update data members
         cout<<"\n1.Edit Customer Account\n";
         switch(ch){
             case 1: cout<<"\nEnter name : ";
@@ -99,7 +98,7 @@ class Customer{
         }
     }
     public:
-    void addnew(){
+    void addnew(){              //public function to add new customer account
         cout<<"\n1.Create Customer Account\n";
         cout<<"\nEnter name : ";
         cin>>ws;
@@ -116,13 +115,13 @@ class Customer{
         getline(cin,address);
     }
 
-    void edit(){
+    void edit(){                //public function to select what to edit in customer details. calls update() to finish task
         int ch=0;
         cout<<"\nWhat do you want to edit? ";
         cout<<"\n1.Name\n2.Phone Number\n3.Email\n4.Address\n5.Go back\n";
         cout<<"\nEnter your choice: ";
         cin>>ch;
-        update(ch);
+        update(ch);             //calling update()
     }
 
     
@@ -135,10 +134,10 @@ class Customer{
         use parameter in createOrder to select how many tickets to order
         then use while loop
 */
-        addPassenger();        
+        addPassenger();         //calls private addPassenger() to create new ticket  
     }
 
-    void displayOrders(){
+    void displayOrders(){       //public function to display all the orders made against an account
         list<Passenger>::iterator it;
         int i=1;
         if(Orderlist.empty()){
@@ -152,7 +151,8 @@ class Customer{
     }
     
     //delete function
-    void Delete(){
+    void Delete(){              //public function to delete account 
+        Orderlist.clear();
         delete this;
         cout<<"\nAccount Deleted!\n";
     }

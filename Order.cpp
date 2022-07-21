@@ -13,15 +13,15 @@ class Order{
     protected:
     double price;
     bool priorityHike=false;
-    //function generating date and time
-    void generateTime(){
+    
+    void generateTime(){        //function generating date and time
         time_t Time=time(0);
         tm *tmp=localtime(&Time);
         this->Time=to_string(tmp->tm_hour)+":"+to_string(tmp->tm_min)+":"+to_string(tmp->tm_sec)+" "+tmp->tm_zone;
         Date=to_string(tmp->tm_mday)+"/"+to_string(tmp->tm_mon)+"/"+to_string(tmp->tm_year+1900);
     }
-    //function generating order id
-    void generateOrderNumber(){
+
+    void generateOrderNumber(){      //function generating order id
         time_t Time=time(0);
         tm *tmp=localtime(&Time);
         ordernumber=tmp->tm_zone+to_string(tmp->tm_mday)+to_string(tmp->tm_mon)+to_string(tmp->tm_year+1900)+to_string(tmp->tm_hour)+to_string(tmp->tm_min)+to_string(tmp->tm_sec)+to_string(orderNo);
@@ -29,26 +29,26 @@ class Order{
     }
 
     public:
-    Order(double price,string destination){                
+    Order(double price,string destination){             //parameterised constructor to create Order object          
         generateOrderNumber();
         generateTime();
         state=destination;
         this->price=price;
     }
 
-    void display(){
+    void display(){         //public display function to display order number
         cout<<"\nOrder Number : "<<ordernumber;
     }
 
-    void setState(string state){        //function to set the state 
+    void setState(string state){        //public function to set the state 
         this->state=state;
     }
 
-    string getState(){
+    string getState(){                  //public function to return state
         return state;
     }
 
-    double getPrice(){
+    double getPrice(){                  //piblic funtion to return the price of the ticket
         return price;
     }
 
@@ -77,8 +77,7 @@ class Passenger:public Order{
             priorityHike=true;
         }
         if(!priorityBoarding && priorityHike){
-            price-=priorityBoardingCharge;
-            priorityHike=false;
+            cout<<"\nOnce Booked as priority boarding it cannot be changed!\nSorry for the inconvenience caused\n";
         }
         
         if(extraweight>0)
@@ -86,16 +85,16 @@ class Passenger:public Order{
         
     }
     public:
-    Passenger(string name,string company,double luggageWeight,string destination,double price,bool priority):Order(price,destination){     //parameterised constructor for passenger information and Order
+    Passenger(string name,string company,double luggageWeight,string destination,double price,bool priority):Order(price,destination){     //parameterised constructor for passenger object and simultaneously calling constructor of Order
         passengerName=name;
         insurance=company;
         weight_of_luggage=luggageWeight;
         priorityBoarding=priority;
-        priorityCheck();
-        extraLuggageCheck();
+        priorityCheck();        //calling priorityCheck to modify fare if required
+        extraLuggageCheck();    //calling extraLuggage check to modify fare if required
     }
 
-    void edit(){
+    void edit(){            //public function to select the 
         int ch=0;
         cout<<"\nWhat do you want to edit? ";
         cout<<"\n1.Passenger Name\n2.Insurance\n3.Weight of luggage\n4.Priority Boarding\n";
