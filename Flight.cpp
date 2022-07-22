@@ -4,5 +4,6 @@ using namespace std;
 
 class Flight{
     int number;
-    departure
-}
+    Time departure,arrival;
+    double nominalPrice;
+};
