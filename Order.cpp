@@ -29,10 +29,10 @@ class Order{
     }
 
     public:
-    Order(double price,string destination){             //parameterised constructor to create Order object          
+    Order(double price){             //parameterised constructor to create Order object          
         generateOrderNumber();
         generateTime();
-        state=destination;
+        setState(0);
         this->price=price;
     }
 
@@ -40,8 +40,15 @@ class Order{
         cout<<"\nOrder Number : "<<ordernumber;
     }
 
-    void setState(string state){        //public function to set the state 
-        this->state=state;
+    void setState(int State){        //public function to set the state -1 for cancelled,0 for pending 1 for confirmed
+        if(State==-1)
+            state="Cancelled";
+        else if(State==0)
+            state="Pending";
+        else if(State==1)
+            state="Confirmed";
+        else
+            cout<<"Wrong State!";
     }
 
     string getState(){                  //public function to return state
@@ -85,7 +92,7 @@ class Passenger:public Order{
         
     }
     public:
-    Passenger(string name,string company,double luggageWeight,string destination,double price,bool priority):Order(price,destination){     //parameterised constructor for passenger object and simultaneously calling constructor of Order
+    Passenger(string name,string company,double luggageWeight,double price,bool priority):Order(price){     //parameterised constructor for passenger object and simultaneously calling constructor of Order
         passengerName=name;
         insurance=company;
         weight_of_luggage=luggageWeight;

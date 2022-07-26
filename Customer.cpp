@@ -55,14 +55,11 @@ class Customer{
             priorityBoarding=true;
         else if(temp==2)
             priorityBoarding=false;
-        cout<<"\nEnter destination: ";
-        cin>>ws;
-        getline(cin,destination);
-        price=getPrice(destination);
-        Passenger p1(passengerName,insurance,weight_of_luggage,destination,price,priorityBoarding);     //creating object of Passenger class
+        price=getPrice();
+        Passenger p1(passengerName,insurance,weight_of_luggage,price,priorityBoarding);     //creating object of Passenger class
         Orderlist.push_back(p1);                                                                        //pushing object to list
     }
-    double getPrice(string destnation){     //TODO:function to read a file/ database to find the price of the flight and return
+    double getPrice(){     //TODO:function to read a file/ database to find the price of the flight and return
         double fare;
         cout<<"\nEnter Fare: ";
         cin>>fare;
