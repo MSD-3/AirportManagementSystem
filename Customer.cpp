@@ -8,7 +8,7 @@ using namespace std;
 
 class Customer{
     string email,name,address,phone;
-    list <Passenger> Orderlist;
+    list <Order> Orderlist;
     
     void validatePhone(){       //function ot validate phone number
         const regex pattern("^[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{3}[-\\s\\.]?[0-9]{4,6}$");
@@ -35,7 +35,7 @@ class Customer{
         validateEmail();
     }
 
-    void addPassenger(){        //adds a new passenger to Orderlist
+   /* void addPassenger(){        //adds a new passenger to Orderlist
         string passengerName,insurance,destination;
         int temp;
         double price,weight_of_luggage;
@@ -64,6 +64,31 @@ class Customer{
         cout<<"\nEnter Fare: ";
         cin>>fare;
         return fare;
+    }
+*/
+    void addOrder(){
+        string passengerName,insurance,destination;
+        int temp;
+        double price,weight_of_luggage;
+        bool priorityBoarding=false;
+        cout<<"\nEnter Passenger Name: ";
+        cin>>ws;
+        getline(cin,passengerName);
+
+        cout<<"\nEnter name and number of insurance company : ";
+        cin>>ws;
+        getline(cin,insurance);
+        cout<<"\nEnter weight of luggage : ";
+        cin>>weight_of_luggage;
+        cout<<"\nPress 1 for priority boarding. Press 2 for normal boarding. : ";
+        cin>>temp;
+        if(temp==1)
+            priorityBoarding=true;
+        else if(temp==2)
+            priorityBoarding=false;
+        Passenger p1(passengerName,insurance,weight_of_luggage,priorityBoarding);
+        Order o(p1);
+        Orderlist.push_back(o);
     }
 
     void update(int ch){            //private function to update data members
@@ -131,11 +156,11 @@ class Customer{
         use parameter in createOrder to select how many tickets to order
         then use while loop
 */
-        addPassenger();         //calls private addPassenger() to create new ticket  
+        addOrder();         //calls private addPassenger() to create new ticket  
     }
 
     void displayOrders(){       //public function to display all the orders made against an account
-        list<Passenger>::iterator it;
+        list<Order>::iterator it;
         int i=1;
         if(Orderlist.empty()){
             cout<<"\nNo Booking History!\n";

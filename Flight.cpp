@@ -13,8 +13,3 @@ class Flight{
         return nominalPrice;        //placeholder
     }
 };
-
-int main(){
-    Flight f1;
-    f1.departure.setDate();
-}

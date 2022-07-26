@@ -10,6 +10,7 @@ int main(){
         c->addnew();
         int choice=6;
         do{                             //menu driven system
+                cout<<"\n\n\nMENU\n\n";
                 cout<<"\n1.Book Ticket.";
                 cout<<"\n2.Edit Existing Account.";
                 cout<<"\n3.Display Bookings.";

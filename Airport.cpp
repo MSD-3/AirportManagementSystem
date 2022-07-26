@@ -12,7 +12,7 @@ class Airport{
         this->code=code;
         this->location=location;
     }
-    double getDeesPrice(Flight f){
+    double getFeesPrice(Flight f){
         return f.getAirportFees();
     }
 };
