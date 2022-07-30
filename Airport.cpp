@@ -1,5 +1,4 @@
 #include<iostream>
-#include "Flight.cpp"
 using namespace std;
 
 //class for Airport information
@@ -12,7 +11,7 @@ class Airport{
         this->code=code;
         this->location=location;
     }
-    double getFeesPrice(Flight f){
-        return f.getAirportFees();
-    }
+    //double getFeesPrice(Flight f){
+    //    return f.getAirportFees();
+   // }
 };
