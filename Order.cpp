@@ -9,7 +9,7 @@
 using namespace std;
 
 class Order{
-    string ordernumber,state,Time,Date;
+    string ordernumber,state,OrderTime,Date;
     Passenger passengerInfo;
     static int orderNo;
     protected:
@@ -17,20 +17,23 @@ class Order{
     bool priorityHike=false;
     
     void generateTime(){        //function generating date and time
-        time_t Time=time(0);
-        tm *tmp=localtime(&Time);
-        this->Time=to_string(tmp->tm_hour)+":"+to_string(tmp->tm_min)+":"+to_string(tmp->tm_sec)+" "+tmp->tm_zone;
+        time_t OrderTime=time(0);
+        tm *tmp=localtime(&OrderTime);
+        this->OrderTime=to_string(tmp->tm_hour)+":"+to_string(tmp->tm_min)+":"+to_string(tmp->tm_sec)+" "+tmp->tm_zone;
         Date=to_string(tmp->tm_mday)+"/"+to_string(tmp->tm_mon)+"/"+to_string(tmp->tm_year+1900);
     }
 
     void generateOrderNumber(){      //function generating order id
-        time_t Time=time(0);
-        tm *tmp=localtime(&Time);
+        time_t OrderTime=time(0);
+        tm *tmp=localtime(&OrderTime);
         ordernumber=tmp->tm_zone+to_string(tmp->tm_mday)+to_string(tmp->tm_mon)+to_string(tmp->tm_year+1900)+to_string(tmp->tm_hour)+to_string(tmp->tm_min)+to_string(tmp->tm_sec)+to_string(orderNo);
         orderNo++;     
     }
 
     public:
+    Order(){
+        
+    }
     Order(Passenger p){             //parameterised constructor to create Order object          
         generateOrderNumber();
         generateTime();
@@ -58,7 +61,7 @@ class Order{
         return state;
     }
 
-    double getPrice(){                  //piblic funtion to return the price of the ticket
+    double getPrice(){                  //public funtion to return the price of the ticket
         return price;
     }
 
@@ -66,6 +69,10 @@ class Order{
         setState(-1);       //setting state to cancelled
         display();
         passengerInfo.Delete();
+    }
+
+    Passenger getPassenger(){       //function to get Passenger Info
+        return passengerInfo;
     }
 };
 int Order::orderNo=0;   //number of order counter
