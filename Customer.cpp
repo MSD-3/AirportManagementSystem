@@ -2,14 +2,14 @@
 #include<iostream>
 #include<list>
 #include<iterator>
-#include "Order.cpp"
+#include "OrderFlight.cpp"
 #define maxTickets 5
 using namespace std;
 
 class Customer{
     string email,name,address,phone;
-    list <Order> Orderlist;
-    
+    list <OrderFlight> Orderlist;
+
     void validatePhone(){       //function ot validate phone number
         const regex pattern("^[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{3}[-\\s\\.]?[0-9]{4,6}$");
         if(!regex_match(phone, pattern)){
@@ -35,37 +35,6 @@ class Customer{
         validateEmail();
     }
 
-   /* void addPassenger(){        //adds a new passenger to Orderlist
-        string passengerName,insurance,destination;
-        int temp;
-        double price,weight_of_luggage;
-        bool priorityBoarding=false;
-        cout<<"\nEnter Passenger Name: ";
-        cin>>ws;
-        getline(cin,passengerName);
-
-        cout<<"\nEnter name and number of insurance company : ";
-        cin>>ws;
-        getline(cin,insurance);
-        cout<<"\nEnter weight of luggage : ";
-        cin>>weight_of_luggage;
-        cout<<"\nPress 1 for priority boarding. Press 2 for normal boarding. : ";
-        cin>>temp;
-        if(temp==1)
-            priorityBoarding=true;
-        else if(temp==2)
-            priorityBoarding=false;
-        price=getPrice();
-        Passenger p1(passengerName,insurance,weight_of_luggage,price,priorityBoarding);     //creating object of Passenger class
-        Orderlist.push_back(p1);                                                                        //pushing object to list
-    }
-    double getPrice(){     //TODO:function to read a file/ database to find the price of the flight and return
-        double fare;
-        cout<<"\nEnter Fare: ";
-        cin>>fare;
-        return fare;
-    }
-*/
     void addOrder(){
         string passengerName,insurance,destination;
         int temp;
@@ -87,9 +56,12 @@ class Customer{
         else if(temp==2)
             priorityBoarding=false;
         Passenger p1(passengerName,insurance,weight_of_luggage,priorityBoarding);
-        Order o(p1);
+        OrderFlight o(p1);
+        o.addPassenger();
         Orderlist.push_back(o);
     }
+
+
 
     void update(int ch){            //private function to update data members
         cout<<"\n1.Edit Customer Account\n";
@@ -160,7 +132,7 @@ class Customer{
     }
 
     void displayOrders(){       //public function to display all the orders made against an account
-        list<Order>::iterator it;
+        list<OrderFlight>::iterator it;
         int i=1;
         if(Orderlist.empty()){
             cout<<"\nNo Booking History!\n";

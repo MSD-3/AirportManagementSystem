@@ -62,5 +62,10 @@ class Order{
         return price;
     }
 
+    void CancelOrder(){     //function for order cancellation
+        setState(-1);       //setting state to cancelled
+        display();
+        passengerInfo.Delete();
+    }
 };
 int Order::orderNo=0;   //number of order counter

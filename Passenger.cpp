@@ -92,4 +92,8 @@ class Passenger{
         cout<<"\nPriority Boarding : "<<(priorityBoarding?"Yes":"No");
  //       cout<<"\nFare : "<<getPrice()<<endl;
     }
+
+    void Delete(){              //deleting Passenger Object
+        delete this;
+    }
 };
