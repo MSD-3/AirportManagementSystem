@@ -9,6 +9,7 @@ using namespace std;
 class Customer{
     string email,name,address,phone;
     list <OrderFlight> Orderlist;
+    bool deleted=false;
 
     void validatePhone(){       //function ot validate phone number
         const regex pattern("^[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{3}[-\\s\\.]?[0-9]{4,6}$");
@@ -146,8 +147,13 @@ class Customer{
     
     //delete function
     void Delete(){              //public function to delete account 
+        deleted=true;
         Orderlist.clear();
-        delete this;
+        name+=" (Cancelled)";
         cout<<"\nAccount Deleted!\n";
+    }
+
+    string getName(){
+        return name;
     }
 };
