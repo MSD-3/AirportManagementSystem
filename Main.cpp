@@ -1,12 +1,12 @@
 //preprocessor directives
 #include<iostream>
-#include<array>
+#include<list>
 #include<iterator>
 #include "Customer.cpp"
 #include "Admin.cpp"
 using namespace std;
-array<Customer,100> CustomerList;
-void customermenu(Customer *c){
+list<Customer> CustomerList{};
+Customer customermenu(Customer c){
         int choice;
         do{                             //menu driven system
                 cout<<"\n\n\nMENU\n\n";
@@ -18,13 +18,13 @@ void customermenu(Customer *c){
                 cout<<"\n\nEnter Choice: ";
                 cin>>choice;
                 switch(choice){
-                        case 1:c->createOrder();
+                        case 1:c.createOrder();
                                 break;
-                        case 2:c->edit();
+                        case 2:c.edit();
                                 break;
-                        case 3:c->displayOrders();
+                        case 3:c.displayOrders();
                                 break;
-                        case 4:c->Delete();
+                        case 4:c.Delete();
                                 choice=5;
                                 break;
                         case 5:break;
@@ -32,30 +32,36 @@ void customermenu(Customer *c){
                                 break;
                 }
         }while(choice!=5);  //exiting condition
-        return;
+        return c;
 }
 
 void selectExistingCustomer(){
+        list<Customer>::iterator it;
         if(CustomerList.empty()){
                 cout<<"\nNo customer details in the system!";
                 return;
         }
         int i=0,num;
         string name;
-        for(;i<CustomerList.size();i++){
-                cout<<endl<<i+1<<". "<<CustomerList.at(i).getName();
+        for(it=CustomerList.begin();it!=CustomerList.end();it++,i++){
+                cout<<endl<<i+1<<". "<<it->getName();
         }
         do{
                 cout<<"\n\nSelect account : ";
                 cin>>num;
         }while(num>i+1);
-        customermenu(&CustomerList.at(num-1));
+        it=CustomerList.begin();
+        for(i=0;i<num-1;i++)
+                it++;
+        *it=customermenu(*it);
+        cout<<endl<<it->getName();
+        //CustomerList.insert(temp,i);
 }
 
 Customer createCustomer(){
         Customer c;
         c.addnew();
-        customermenu(&c);
+        c=customermenu(c);
         return c;
 }
 int main(){
@@ -87,7 +93,7 @@ int main(){
                 cout<<"\n\nEnter your choice : ";
                 cin>>choice;
                 switch(choice){
-                        case 1:CustomerList[i++]=createCustomer();
+                        case 1:CustomerList.push_back(createCustomer());
                                 break;
                         case 2:selectExistingCustomer();
                                 break;

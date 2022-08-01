@@ -7,6 +7,7 @@
 using namespace std;
 
 class Customer{
+    static int customerID;
     string email,name,address,phone;
     list <OrderFlight> Orderlist;
     bool deleted=false;
@@ -37,6 +38,10 @@ class Customer{
     }
 
     void addOrder(){
+        if(deleted){
+            cout<<"\nAccount already Deleted!";
+            return;
+        }
         string passengerName,insurance,destination;
         int temp;
         double price,weight_of_luggage;
@@ -108,6 +113,7 @@ class Customer{
         cout<<"\nEnter address : ";
         cin>>ws;
         getline(cin,address);
+        customerID++;
     }
 
     void edit(){                //public function to select what to edit in customer details. calls update() to finish task
@@ -149,7 +155,7 @@ class Customer{
     void Delete(){              //public function to delete account 
         deleted=true;
         Orderlist.clear();
-        name+=" (Cancelled)";
+        name+=" (Deleted)";
         cout<<"\nAccount Deleted!\n";
     }
 
@@ -157,3 +163,4 @@ class Customer{
         return name;
     }
 };
+int Customer::customerID=0;
