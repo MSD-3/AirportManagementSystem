@@ -9,6 +9,19 @@ class Time{
     time_t now = time(0);
     tm *ltm = localtime(&now);
     public:
+    Time(){
+
+    }
+
+    Time (const Time&t){        //copy constructor
+        day=t.day;
+        month=t.month;
+        year=t.year;
+        hr=t.hr;
+        min=t.min;
+        sec=t.sec;
+    }
+
     void setTime(){     //setting required time to object  format : HH:MM:SS  
         cout<<"\nEnter time in HH:MM:SS format : ";
         scanf("%d:%d:%d",&hr,&min,&sec);
@@ -66,6 +79,10 @@ class Time{
         if (year % 4 == 0)          //leap year multiple of 4 but not 100
             return true;
     return false;
+    }
+
+    void displaymenu(){
+        cout<<day<<"/"<<month<<"/"<<year<<"\t"<<hr<<":"<<min<<":"<<sec;
     }
 
 };

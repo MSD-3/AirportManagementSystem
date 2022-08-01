@@ -4,8 +4,10 @@
 #include<iterator>
 #include "Customer.cpp"
 #include "Admin.cpp"
+#include "Schedule.cpp"
 using namespace std;
 list<Customer> CustomerList{};
+Schedule *schedule=new Schedule();      // object of type Schedule to maange flights
 Customer customermenu(Customer c){
         int choice;
         do{                             //menu driven system
@@ -14,7 +16,7 @@ Customer customermenu(Customer c){
                 cout<<"\n2.Edit Existing Account.";
                 cout<<"\n3.Display Bookings.";
                 cout<<"\n4.Delete Account.";
-                cout<<"\n5.Exit.";
+                cout<<"\n5.Return.";
                 cout<<"\n\nEnter Choice: ";
                 cin>>choice;
                 switch(choice){
@@ -34,6 +36,31 @@ Customer customermenu(Customer c){
         }while(choice!=5);  //exiting condition
         return c;
 }
+
+void schedulemenu(){
+        int choice;
+        do{
+                cout<<"\n1.Schedule Flight.";
+                cout<<"\n2.Remove Flight.";
+                cout<<"\n3.Display Flight Schedule.";
+                cout<<"\n4.Return.";
+                cout<<"\nEnter your choice : ";
+                cin>>choice;
+                switch(choice){
+                        case 1:schedule->addFlight();
+                                break;
+                        case 2:schedule->removeFlight();
+                                break;
+                        case 3:schedule->display();
+                                break;
+                        case 4: break;
+                        default:cout<<"\nWrong Input.\nTry Again.\n";
+                                break;
+                }
+        }while(choice!=4);               //exit condition
+
+}
+
 
 void selectExistingCustomer(){
         list<Customer>::iterator it;
@@ -72,6 +99,7 @@ int main(){
         bool flag=true;         //flag for admin credentials input
         Admin *a=new Admin;
         do{
+                flag=true;
                 cout<<"\nEnter Admin Credentials";              //taking input of admin credentials
                 cout<<"\nID: ";
                 cin>>id;
@@ -84,11 +112,9 @@ int main(){
         do{                             //menu driven system
                 cout<<"\n\n\nMENU\n\n";
                 cout<<"\n1.Add new Customer.";
-                cout<<"\n2.Select Exisiting Customer. ";
-                cout<<"\n3.Schedule Flight.";
-                cout<<"\n4.Search Flight.";
-                cout<<"\n5.Remove Flight.";
-                cout<<"\n6.Exit";
+                cout<<"\n2.Select Exisiting Customer.";
+                cout<<"\n3.Manage Flight Schedule.";
+                cout<<"\n4.Exit";
                 cout<<"\n\nEnter your choice : ";
                 cin>>choice;
                 switch(choice){
@@ -96,13 +122,9 @@ int main(){
                                 break;
                         case 2:selectExistingCustomer();
                                 break;
-                        case 3://scheduleflight
+                        case 3:schedulemenu();
                                 break;
-                        case 4://searchflight
-                                break;
-                        case 5://removeflight
-                                break;
-                        case 6:cout<<"\nExiting\n";
+                        case 4:cout<<"\nExiting\n";
                                 break;
                         default:cout<<"\nWrong Input.\nTry Again.\n";
                                 break;

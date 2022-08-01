@@ -10,11 +10,13 @@ class Flight:public ScheduleFlight{
     public:
     int number;    
     double nominalPrice;
+    void setNumber(){
+        cout<<"\n Enter Flight number : ";
+        cin>>number;
+    }    
     void addNew(){
         string airportName,location;
         int code;
-        cout<<"\n Enter Flight number : ";
-        cin>>number;
         //departure airport details
         cout<<"\nEnter Departure location : ";
         cin>>ws;
@@ -44,7 +46,7 @@ class Flight:public ScheduleFlight{
             cin>>nominalPrice;
             if(nominalPrice<0)
                 cout<<"\nFare cannot be negative.";
-        }while(nominalPrice>0);
+        }while(nominalPrice<0);
     }
     double getAirportFees(){
         return nominalPrice;        //placeholder
@@ -64,5 +66,17 @@ class Flight:public ScheduleFlight{
     }
     bool operator==(const Flight& rhs) const {  //operator overloading for logical equals to compare two Flight Type object
         return number == rhs.number;
+    }
+
+    int getFlightNumber(){
+        return number;
+    }
+
+    Time getDepartureTime(){
+        return departure;
+    }
+
+    Time getArrivalTime(){
+        return arrival;
     }
 };

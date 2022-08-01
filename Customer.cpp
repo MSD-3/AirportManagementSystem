@@ -131,10 +131,6 @@ class Customer{
             cout<<"\nMax "<<maxTickets<<" tickets per customer!\n";
             return;
         }
-/*
-        use parameter in createOrder to select how many tickets to order
-        then use while loop
-*/
         addOrder();         //calls private addPassenger() to create new ticket  
     }
 
