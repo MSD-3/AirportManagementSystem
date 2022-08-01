@@ -74,7 +74,7 @@ class Flight:public ScheduleFlight{         //ScheduleFlight is being inherited 
     Time getArrivalTime(){          //returns Arrival object oftype Time
         return arrival;
     }
-    double getPrice(){
+    double getPrice(){              //returns price object
         return nominalPrice;
     }
 };
