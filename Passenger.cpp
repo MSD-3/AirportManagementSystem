@@ -1,8 +1,14 @@
 #include <iostream>
 using namespace std;
-#define extraLuggageRate 50.00
-#define priorityBoardingCharge 200
+#define extraLuggageRate 50.00          //charge of extra luggage per kg
+#define priorityBoardingCharge 200      //extra charge of prirority boarding
 class Passenger{
+    /* 
+    passengerName stores the name of the passenger
+    insurance stores the information of the insurance company
+    weight_of_luggage is stored here
+    extraFare due to priority boarding and extra luggage is stored here
+      */
     string passengerName,insurance;
     double weight_of_luggage,extraFare;
     protected:
@@ -41,11 +47,11 @@ class Passenger{
         insurance=company;
         weight_of_luggage=luggageWeight;
         priorityBoarding=priority;
-        //priorityCheck();        //calling priorityCheck to modify fare if required
+        priorityCheck();        //calling priorityCheck to modify fare if required
         extraLuggageCheck();    //calling extraLuggage check to modify fare if required
     }
 
-    void edit(){            //public function to select the 
+    void edit(){            //public functionDeparture to select the 
         int ch=0;
         cout<<"\nWhat do you want to edit? ";
         cout<<"\n1.Passenger Name\n2NodeInsurance\n3.Weight of luggage\n4.Priority Boarding\n";
@@ -54,7 +60,7 @@ class Passenger{
         update(ch);
     }
 
-    void update(int ch){
+    void update(int ch){            //function to update passenger info
         switch(ch){
             case 1: cout<<"\nEnter name : ";
                     cin>>ws;
@@ -78,14 +84,14 @@ class Passenger{
                         priorityBoarding=true;
                     else if(temp==2)
                         priorityBoarding=false;
-                    //priorityCheck();
+                    priorityCheck();        //priority check after updation
                     break;
 
             default:cout<<"\n\nWrong Choice Entered!\n";
                     break;
         }
     }
-    void display(){
+    void display(){     //function to display passenger info
         cout<<"\nPassenger Name : "<<passengerName;
         cout<<"\nInsurance Information : "<<insurance;
         cout<<"\nLuggage Weight : "<<weight_of_luggage;

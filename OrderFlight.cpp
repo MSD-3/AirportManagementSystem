@@ -3,8 +3,8 @@
 #include<iterator>
 using namespace std;
 
-class OrderFlight:public Order{
-    static int passenger_no;
+class OrderFlight:public Order{     //redundant
+    static int passenger_no;        //stores the number of passengers in the order
     public:
     OrderFlight(){
         

@@ -3,6 +3,11 @@
 #include<iterator>
 using namespace std;
 class ScheduleFlight{
+    /*
+    capacity of the Flight is stored
+    PassengerList stores the list of passengers present in the flight
+    currentPrice is the base fare for the flight
+    */
     int capacity;
     list<Passenger> PassengerList;
     double currentPrice;
@@ -31,14 +36,14 @@ class ScheduleFlight{
             break;
         }
         if(exists){
-            order.setState(-1);
+            order.setState(-1);     //setting order status to cancelled
             PassengerList.remove(order.getPassenger());
         }
         else
             cout<<"\nPassenger not present in flight";
     }
 
-    int getCapacity(){
+    int getCapacity(){      //returns the capacity of the flight
         return capacity;
     }
 };

@@ -10,12 +10,21 @@
 using namespace std;
 Schedule *schedule=new Schedule();      // object of type Schedule to maange flights
 class Customer{
+    /*
+        customerID stores the customer id of the 
+        email stores the email id of the customer
+        name stores the name of the customer
+        address stores the address of the customer
+        phone stores the phone number of the customer
+        OrderList stores the list of orders made by the customer
+        deleted stores if the account is deleted or not, if deleted then booking records is deleted and no further booking can be made
+    */
     static int customerID;
     string email,name,address,phone;
     list <OrderFlight> Orderlist;
     bool deleted=false;
 
-    void validatePhone(){       //function ot validate phone number
+    void validatePhone(){       //private function ot validate phone number
         const regex pattern("^[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{3}[-\\s\\.]?[0-9]{4,6}$");
         if(!regex_match(phone, pattern)){
             cout<<"\nEnter proper Phone number!";
@@ -27,7 +36,7 @@ class Customer{
         validatePhone();
     }
     
-    void validateEmail(){            //function to validate email
+    void validateEmail(){            //private function to validate email
         const regex pattern(
         "(\\w+)(\\.|_)?(\\w*)@(\\w+)(\\.(\\w+))+");
         if(!regex_match(email, pattern)){
@@ -40,12 +49,12 @@ class Customer{
         validateEmail();
     }
 
-    void addOrder(){
-        if(deleted){
+    void addOrder(){            //creates a new order 
+        if(deleted){            //checking if account is deleted or not
             cout<<"\nAccount already Deleted!";
             return;
         }
-        string passengerName,insurance,destination;
+        string passengerName,insurance,destination; //variable declaration
         int temp,flightno;
         Flight *F;
         double price,weight_of_luggage;
@@ -53,12 +62,12 @@ class Customer{
         schedule->display();
         cout<<"\nSelect Flight number : ";
         cin>>flightno;
-        F=schedule->searchFlight(flightno);
+        F=schedule->searchFlight(flightno);     //searching flight chosen
         if(F==nullptr){
             cout<<"\n\nFlight Not In list!";
             return;
         }
-        cout<<"\nEnter Passenger Name: ";
+        cout<<"\nEnter Passenger Name: ";       //taking passenger info
         cin>>ws;
         getline(cin,passengerName);
 
@@ -73,13 +82,13 @@ class Customer{
             priorityBoarding=true;
         else if(temp==2)
             priorityBoarding=false;
-        Passenger p1(passengerName,insurance,weight_of_luggage,priorityBoarding);
-        OrderFlight o(p1);
+        Passenger p1(passengerName,insurance,weight_of_luggage,priorityBoarding);       //creating passenger object
+        OrderFlight o(p1);          //creating orderFlight object and passing passenger as a paramenter
         o.addPassenger();
         o.setPrice(F->getPrice());  //plane fare
         o.setPrice(o.getPrice()+p1.getExtraFare());
-        F->addPassenger(&o);
-        Orderlist.push_back(o);
+        F->addPassenger(&o);          //adding pasenger to Flight list for confirmation
+        Orderlist.push_back(o);       //pusing order to orderlist
     }
 
 
@@ -94,12 +103,12 @@ class Customer{
             
             case 2: cout<<"\nEnter phone : ";
                     cin>>phone;
-                    validatePhone();
+                    validatePhone();        //validating phone after updation
                     break;
 
             case 3: cout<<"\nEnter email : ";
                     cin>>email;
-                    validateEmail();
+                    validateEmail();        //validating email after updation
                     break;
 
             case 4: cout<<"\nEnter address : ";

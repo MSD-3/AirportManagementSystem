@@ -1,27 +1,31 @@
 #include<iostream>
 using namespace std;
 
-class Admin{
+class Admin{            //admin class for login
+/*
+    ID stores the id for login
+    password stores the password for login
+*/
     private:
     string ID;
     string password;
     public:
-    Admin(){
-        ID="admin";
+    Admin(){        //default id password initialised
+        ID="admin";         
         password="admin";
     }
-    void setID(string id){
+    void setID(string id){          //id setter
         ID=id;
     }
-    string getID(){
+    string getID(){                 //id getter
         return ID;
     }
 
-    void setPassword(string pass){
+    void setPassword(string pass){      //password setter
         password=pass;
     }
 
-    string getPassword(){
+    string getPassword(){               //password getter
         return password;
     }
 };

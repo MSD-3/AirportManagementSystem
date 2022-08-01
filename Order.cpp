@@ -6,7 +6,14 @@
 using namespace std;
 
 class Order{
-    string ordernumber,state,OrderTime,Date,Boarding,Destination;
+    /* ordernumber stores the auto generated order number
+        state stores whether the order is pending , confirmed or  cancelled
+        OrderTime sotres the time the order is created
+        Date stores the date the order is created
+        Boarding and Destination stores the location for boarding and destination
+        
+        passengerInfo stores data of passenger linked to this order*/
+    string ordernumber,state,OrderTime,Date,Boarding,Destination;       
     Passenger passengerInfo;
     static int orderNo;
     protected:

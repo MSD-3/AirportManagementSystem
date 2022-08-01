@@ -19,13 +19,13 @@ Customer customermenu(Customer c){
                 cout<<"\n\nEnter Choice: ";
                 cin>>choice;
                 switch(choice){
-                        case 1:c.createOrder();
+                        case 1:c.createOrder();         //creates an order under current customer selected
                                 break;
-                        case 2:c.edit();
+                        case 2:c.edit();                //edits current customer account
                                 break;
-                        case 3:c.displayOrders();
+                        case 3:c.displayOrders();       //displays order placed
                                 break;
-                        case 4:c.Delete();
+                        case 4:c.Delete();              //deletes customer account
                                 choice=5;
                                 break;
                         case 5:break;
@@ -46,11 +46,11 @@ void schedulemenu(){
                 cout<<"\nEnter your choice : ";
                 cin>>choice;
                 switch(choice){
-                        case 1:schedule->addFlight();
+                        case 1:schedule->addFlight();           //adds a new flight to the schedule
                                 break;
-                        case 2:schedule->removeFlight();
+                        case 2:schedule->removeFlight();        //removes existing flight from the schedule list
                                 break;
-                        case 3:schedule->display();
+                        case 3:schedule->display();             //displays flight schedule
                                 break;
                         case 4: break;
                         default:cout<<"\nWrong Input.\nTry Again.\n";
@@ -61,32 +61,32 @@ void schedulemenu(){
 }
 
 
-void selectExistingCustomer(){
-        list<Customer>::iterator it;
+void selectExistingCustomer(){                          //function to search for an existing customer from the list
+        list<Customer>::iterator it;        
         if(CustomerList.empty()){
                 cout<<"\nNo customer details in the system!";
                 return;
         }
         int i=0,num;
         string name;
-        for(it=CustomerList.begin();it!=CustomerList.end();it++,i++){
+        for(it=CustomerList.begin();it!=CustomerList.end();it++,i++){           //traverses the CustomerList to select exisitng customer ocject
                 cout<<endl<<i+1<<". "<<it->getName();
         }
         do{
                 cout<<"\n\nSelect account : ";
                 cin>>num;
-        }while(num>i+1);
+        }while(num>i+1);                                
         it=CustomerList.begin();
         for(i=0;i<num-1;i++)
                 it++;
-        *it=customermenu(*it);
+        *it=customermenu(*it);                  //calls customer menu after finding the account in the list
         cout<<endl<<it->getName();
 }
 
-Customer createCustomer(){
+Customer createCustomer(){                      //creates a new customer object to work with
         Customer c;
         c.addnew();
-        c=customermenu(c);
+        c=customermenu(c);                      //calls customermenu to do further operations using customer object
         return c;
 }
 int main(){
@@ -117,7 +117,7 @@ int main(){
                 cout<<"\n\nEnter your choice : ";
                 cin>>choice;
                 switch(choice){
-                        case 1:CustomerList.push_back(createCustomer());
+                        case 1:CustomerList.push_back(createCustomer());                //adds new customer to the CustomerList
                                 break;
                         case 2:selectExistingCustomer();
                                 break;

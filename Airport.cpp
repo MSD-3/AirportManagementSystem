@@ -3,13 +3,17 @@ using namespace std;
 
 //class for Airport information
 class Airport{
+    /*
+        name stores the name of the airport
+        location stores the palce the airport is located
+    */
     string name,location;
     int code;
     public:
-    Airport(){
+    Airport(){          //default constructor
 
     }
-    Airport(const Airport &obj){
+    Airport(const Airport &obj){                //copy constructor
         name=obj.name;
         location=obj.location;
         code=obj.code;
@@ -19,7 +23,7 @@ class Airport{
         this->code=code;
         this->location=location;
     }
-    void display(){
+    void display(){             //display function for Airport
         cout<<"\nAirport Location : "<<location;
         cout<<"\nAirport Name : "<<name;
         cout<<"\nAirport Code : "<<code;

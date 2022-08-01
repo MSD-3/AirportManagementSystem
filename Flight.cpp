@@ -4,11 +4,11 @@
 #include "../AirportManagementSystem/Dependencies/Time.cpp"
 using namespace std;
 
-class Flight:public ScheduleFlight{
-    Time departure,arrival;
-    Airport *ArrivalAirport,*DepartureAirport;
+class Flight:public ScheduleFlight{         //ScheduleFlight is being inherited by Flight class
+    Time departure,arrival;             //departure and arrival Time objects
+    Airport *ArrivalAirport,*DepartureAirport;      //arrival and departure Airport objects
     public:
-    int number;    
+    int number;     //Flight Number
     double nominalPrice;
     void setNumber(){
         cout<<"\n Enter Flight number : ";
@@ -52,11 +52,6 @@ class Flight:public ScheduleFlight{
         return nominalPrice;        //placeholder
     }
 
-    /*void setTime(Time Arrival,Time Departure){
-        departure=Departure;
-        arrival=Arrival;
-    } */
-
     Airport getArrivalAirport(){    //returns ArrivalAirport object
         return *ArrivalAirport;
     }
@@ -68,15 +63,15 @@ class Flight:public ScheduleFlight{
         return number == rhs.number;
     }
 
-    int getFlightNumber(){
+    int getFlightNumber(){          //returns flight number
         return number;
     }
 
-    Time getDepartureTime(){
+    Time getDepartureTime(){        //returns Departure object oftype Time
         return departure;
     }
 
-    Time getArrivalTime(){
+    Time getArrivalTime(){          //returns Arrival object oftype Time
         return arrival;
     }
     double getPrice(){
