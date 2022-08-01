@@ -159,8 +159,13 @@ class Customer{
         cout<<"\nAccount Deleted!\n";
     }
 
-    string getName(){
+    string getName(){       //returns name of customer
         return name;
     }
+    int getCustomerID(){        //returns customerID
+        return customerID;
+    }
+
+
 };
 int Customer::customerID=0;

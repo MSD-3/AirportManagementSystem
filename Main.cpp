@@ -55,7 +55,6 @@ void selectExistingCustomer(){
                 it++;
         *it=customermenu(*it);
         cout<<endl<<it->getName();
-        //CustomerList.insert(temp,i);
 }
 
 Customer createCustomer(){

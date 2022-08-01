@@ -46,7 +46,7 @@ class Passenger{
     void edit(){            //public function to select the 
         int ch=0;
         cout<<"\nWhat do you want to edit? ";
-        cout<<"\n1.Passenger Name\n2.Insurance\n3.Weight of luggage\n4.Priority Boarding\n";
+        cout<<"\n1.Passenger Name\n2NodeInsurance\n3.Weight of luggage\n4.Priority Boarding\n";
         cout<<"\nEnter your choice: ";
         cin>>ch;
         update(ch);
@@ -95,5 +95,9 @@ class Passenger{
 
     void Delete(){              //deleting Passenger Object
         delete this;
+    }
+
+    bool operator==(const Passenger& rhs) const {   //operator overloading for logical equals to compare two Passenger Type object
+        return passengerName == rhs.passengerName and weight_of_luggage == rhs.weight_of_luggage;
     }
 };
