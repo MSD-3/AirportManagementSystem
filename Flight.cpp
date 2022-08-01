@@ -39,7 +39,7 @@ class Flight:public ScheduleFlight{
         cout<<"\nEnter Arrival Airport Code : ";
         cin>>code;
         cout<<"\nSet Arrival Date and Time: ";
-        departure.setDate();
+        arrival.setDate();
         ArrivalAirport=new Airport(airportName,code,location);  //creating arrival airport object
         do{
             cout<<"Enter Flight Fees : ";
@@ -78,5 +78,8 @@ class Flight:public ScheduleFlight{
 
     Time getArrivalTime(){
         return arrival;
+    }
+    double getPrice(){
+        return nominalPrice;
     }
 };

@@ -4,10 +4,9 @@
 #include<iterator>
 #include "Customer.cpp"
 #include "Admin.cpp"
-#include "Schedule.cpp"
+
 using namespace std;
 list<Customer> CustomerList{};
-Schedule *schedule=new Schedule();      // object of type Schedule to maange flights
 Customer customermenu(Customer c){
         int choice;
         do{                             //menu driven system
@@ -129,6 +128,6 @@ int main(){
                         default:cout<<"\nWrong Input.\nTry Again.\n";
                                 break;
                 }
-        }while(choice!=6);  //exiting condition
+        }while(choice!=4);  //exiting condition
         return 0;
 }

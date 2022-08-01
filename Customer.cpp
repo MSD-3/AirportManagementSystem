@@ -3,9 +3,12 @@
 #include<list>
 #include<iterator>
 #include "OrderFlight.cpp"
+#include "Flight.cpp"
+#include "Schedule.cpp"
 #define maxTickets 5
-using namespace std;
 
+using namespace std;
+Schedule *schedule=new Schedule();      // object of type Schedule to maange flights
 class Customer{
     static int customerID;
     string email,name,address,phone;
@@ -43,9 +46,18 @@ class Customer{
             return;
         }
         string passengerName,insurance,destination;
-        int temp;
+        int temp,flightno;
+        Flight *F;
         double price,weight_of_luggage;
         bool priorityBoarding=false;
+        schedule->display();
+        cout<<"\nSelect Flight number : ";
+        cin>>flightno;
+        F=schedule->searchFlight(flightno);
+        if(F==nullptr){
+            cout<<"\n\nFlight Not In list!";
+            return;
+        }
         cout<<"\nEnter Passenger Name: ";
         cin>>ws;
         getline(cin,passengerName);
@@ -64,6 +76,9 @@ class Customer{
         Passenger p1(passengerName,insurance,weight_of_luggage,priorityBoarding);
         OrderFlight o(p1);
         o.addPassenger();
+        o.setPrice(F->getPrice());  //plane fare
+        o.setPrice(o.getPrice()+p1.getExtraFare());
+        F->addPassenger(&o);
         Orderlist.push_back(o);
     }
 
@@ -149,6 +164,8 @@ class Customer{
     
     //delete function
     void Delete(){              //public function to delete account 
+        if(deleted==true)
+            return;
         deleted=true;
         Orderlist.clear();
         name+=" (Deleted)";

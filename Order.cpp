@@ -3,18 +3,14 @@
 #include<regex>
 #include<ctime>
 #include "Passenger.cpp"
-#define priorityBoardingCharge 300.00
-#define extraLuggageRate 50.00
-
 using namespace std;
 
 class Order{
-    string ordernumber,state,OrderTime,Date;
+    string ordernumber,state,OrderTime,Date,Boarding,Destination;
     Passenger passengerInfo;
     static int orderNo;
     protected:
-    double price;
-    bool priorityHike=false;
+    double price=0;
     
     void generateTime(){        //function generating date and time
         time_t OrderTime=time(0);
@@ -39,11 +35,15 @@ class Order{
         generateTime();
         setState(0);
         passengerInfo=p;
+        cin>>ws;
+        getline(cin,Destination);
     }
 
     void display(){         //public display function to display order number
         cout<<"\nOrder Number : "<<ordernumber;
+        cout<<"\nStatus : "<<state;
         passengerInfo.display();
+        cout<<"\n\nTicket Price : "<<price;
     }
 
     void setState(int State){        //public function to set the state -1 for cancelled,0 for pending 1 for confirmed
@@ -63,6 +63,10 @@ class Order{
 
     double getPrice(){                  //public funtion to return the price of the ticket
         return price;
+    }
+
+    void setPrice(double Price){
+        price=Price;
     }
 
     void CancelOrder(){     //function for order cancellation

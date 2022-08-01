@@ -1,25 +1,26 @@
 #include <iostream>
 using namespace std;
-
+#define extraLuggageRate 50.00
+#define priorityBoardingCharge 200
 class Passenger{
     string passengerName,insurance;
-    double weight_of_luggage;
+    double weight_of_luggage,extraFare;
     protected:
-    bool extraLuggage,priorityBoarding;
-
+    bool extraLuggage,priorityBoarding,priorityHike=false;
     void extraLuggageCheck(){               //check for extra luggage and call modifyPrice
         if(weight_of_luggage>20.0){
             extraLuggage=true;
-            //modifyPrice(weight_of_luggage-20.0);
+            modifyPrice(weight_of_luggage-20.0);
         }
     }
 
-    /*void priorityCheck(){       //check priority and call modify price
+
+    void priorityCheck(){       //check priority and call modify price
         modifyPrice();
     }
     void modifyPrice(double extraweight=0.0){
         if(priorityBoarding && !priorityHike){          //when priority is selected
-            price+=priorityBoardingCharge;
+            extraFare+=priorityBoardingCharge;
             priorityHike=true;
         }
         if(!priorityBoarding && priorityHike){
@@ -27,9 +28,10 @@ class Passenger{
         }
         
         if(extraweight>0)
-            price+=extraweight*extraLuggageRate;
+            extraFare+=extraweight*extraLuggageRate;
         
-    }*/
+    }
+
     public:
     Passenger(){
         
@@ -84,13 +86,10 @@ class Passenger{
         }
     }
     void display(){
- //       Order::display();
         cout<<"\nPassenger Name : "<<passengerName;
-//        cout<<"\nDestination : "<<getState();
         cout<<"\nInsurance Information : "<<insurance;
         cout<<"\nLuggage Weight : "<<weight_of_luggage;
         cout<<"\nPriority Boarding : "<<(priorityBoarding?"Yes":"No");
- //       cout<<"\nFare : "<<getPrice()<<endl;
     }
 
     void Delete(){              //deleting Passenger Object
@@ -99,5 +98,9 @@ class Passenger{
 
     bool operator==(const Passenger& rhs) const {   //operator overloading for logical equals to compare two Passenger Type object
         return passengerName == rhs.passengerName and weight_of_luggage == rhs.weight_of_luggage;
+    }
+
+    double getExtraFare(){
+        return extraFare;
     }
 };

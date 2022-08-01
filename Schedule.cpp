@@ -1,4 +1,4 @@
-#include "Flight.cpp"
+
 #include <iterator>
 #include<list>
 class Schedule{
@@ -30,6 +30,11 @@ class Schedule{
         display();
         cout<<"\nEnter Flight Number";
         cin>>flightno;
+        Flight *F=searchFlight(flightno);
+        if(F==nullptr){
+            cout<<"\n\nFlight Not Found!\n\n";
+            return;
+        }
         FlightList.remove(*searchFlight(flightno));
     }
 
@@ -46,20 +51,23 @@ class Schedule{
         cout<<"\nFlight List\n";
         Airport airport;
         Time    t1me;
-        cout<<"Flight Number\t\tDeparture Airport\t\tDeparture Time\t\tArrival Airport\t\tArrival Time";
+        cout<<"Flight Number\t\tDeparture Airport\t\t\tDeparture Time\t\t\tArrival Airport\t\t\t\tArrival Time\n";
             for(it=FlightList.begin();it!=FlightList.end();it++){
-                airport=it->getArrivalAirport();
+                //Departure Airport
                 cout<<it->getFlightNumber()<<"\t\t";
-                airport.displayMenu();
-                cout<<"\t\t";
-                t1me=it->getArrivalTime();
-                t1me.displaymenu();
                 airport=it->getDepartureAirport();
-                cout<<"\t\t";
                 airport.displayMenu();
                 cout<<"\t\t";
                 t1me=it->getDepartureTime();
-                t1me.displaymenu();                
+                t1me.displaymenu(); 
+
+                //Arrival Airport
+                cout<<"\t\t";  
+                airport=it->getArrivalAirport();
+                airport.displayMenu();
+                cout<<"\t\t";
+                t1me=it->getArrivalTime();
+                t1me.displaymenu();             
             }
         cout<<"\n\n";
     }
